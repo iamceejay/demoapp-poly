@@ -1,0 +1,12 @@
+<div class="antialiased flex flex-col h-screen">
+  <app-navbar [title]="title"></app-navbar>
+  <app-button-menu></app-button-menu>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="content">
+    <span>demo app is running!</span>
+  </div>
+</div>

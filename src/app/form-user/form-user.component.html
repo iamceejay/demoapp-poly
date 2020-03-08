@@ -1,0 +1,87 @@
+<mat-card class="form-user mat-elevation-z8">
+    <mat-card-header>
+        <div mat-card-avatar class="form-user-img"></div>
+        <mat-card-title>Add User</mat-card-title>
+        <mat-card-subtitle>Please fill up the fields below</mat-card-subtitle>
+    </mat-card-header>
+    
+    <form 
+        [formGroup]="form"
+        (ngSubmit)="onFormSubmit()"
+    >
+        <mat-card-content>
+            <!-- Name -->
+            <mat-form-field class="input-fluid">
+                <mat-label>Name</mat-label>
+                <input
+                    matInput
+                    formControlName="fullname"
+                    placeholder="Ex. Jhon Doe"
+                    type="text"
+                    [(ngModel)]="user.user_fullname"
+                    [errorStateMatcher]="matcher"
+                >
+                <mat-hint>Enter user's full name</mat-hint>
+                <mat-error *ngIf="form.get('fullname').invalid && form.get('fullname').touched">
+                    <span *ngIf="form.get('fullname').errors.required">
+                        Name is <strong>required</strong>
+                    </span>
+                </mat-error>
+            </mat-form-field>
+            
+            <!-- Email -->
+            <mat-form-field class="input-fluid">
+                <mat-label>Email</mat-label>
+                <input
+                    matInput
+                    formControlName="email"
+                    placeholder="Ex. jhondoe@email.com"
+                    type="email"
+                    [(ngModel)]="user.user_email"
+                    [errorStateMatcher]="matcher"
+                >
+                <mat-hint>Enter user's email address</mat-hint>
+                <mat-error *ngIf="form.get('email').invalid && form.get('email').touched">
+                    <span *ngIf="form.get('email').errors.required">Email is <strong>required</strong></span>
+                    <span *ngIf="form.get('email').errors.email">Please enter a <strong>valid email address</strong></span>
+                </mat-error>
+            </mat-form-field>
+            
+            <!-- Address -->
+            <mat-form-field class="input-fluid">
+                <mat-label>Address</mat-label>
+                <textarea
+                    matInput
+                    formControlName="address"
+                    placeholder="Ex. Building, Street, City"
+                    [(ngModel)]="user.user_address"
+                    [errorStateMatcher]="matcher"
+                ></textarea>
+                <mat-hint>Enter user's address</mat-hint>
+                <mat-error *ngIf="form.get('address').invalid && form.get('address').touched">
+                    <span *ngIf="form.get('address').errors.required">
+                        Address is <strong>required</strong>
+                    </span>
+                </mat-error>
+            </mat-form-field>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <div class="btn-actions">
+                <a
+                    [routerLink]="['/']"
+                    mat-flat-button
+                >
+                    Cancel
+                </a>
+                <button 
+                    mat-flat-button
+                    color="primary"
+                    [disabled]="form.invalid"
+                >
+                    {{ userId ? 'Update' : 'Save' }}
+                </button>
+            </div>
+        </mat-card-actions>
+    </form>
+</mat-card>
